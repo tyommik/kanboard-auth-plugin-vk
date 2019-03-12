@@ -6,7 +6,7 @@ VK OAuth2 authentication plugin based on generic plugin.
 Author
 ------
 
-- Artem SHibaev
+- Artem Shibaev
 - License MIT
 
 Requirements
