@@ -1,7 +1,7 @@
 <h3><i class="fa fa-lock fa-fw" aria-hidden="true"></i><?= t('OAuth2 Authentication') ?></h3>
 <div class="panel">
     <?= $this->form->label(t('Callback URL'), 'oauth2_callback_url') ?>
-    <input type="text" class="auto-select" readonly="readonly" value="<?= $this->url->href('OAuthController', 'handler', array('plugin' => 'OAuth2'), false, '', true) ?>"/>
+    <input type="text" class="auto-select" value="<?= $this->url->href('OAuthController', 'handler', array('plugin' => 'OAuth2'), false, '', true) ?>"/>
 
     <?= $this->form->label(t('Client ID'), 'oauth2_client_id') ?>
     <?= $this->form->password('oauth2_client_id', $values) ?>

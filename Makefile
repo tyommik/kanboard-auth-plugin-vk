@@ -1,4 +1,4 @@
-plugin=OAuth2
+plugin=VkontakteAuth
 
 all:
 	@ echo "Build archive for plugin ${plugin} version=${version}"

@@ -114,6 +114,20 @@ class GenericOAuth2Provider extends Base implements OAuthAuthenticationProviderI
     }
 
     /**
+     * Get authorization header
+     *
+     * @access public
+     * @return string
+     */
+    public function getAuthorizationHeader()
+    {
+        if (! empty($this->accessToken)) {
+            return $this->accessToken;
+        }
+        return '';
+    }
+
+    /**
      * Get user profile
      *
      * @access public
@@ -122,7 +136,7 @@ class GenericOAuth2Provider extends Base implements OAuthAuthenticationProviderI
     public function getProfile()
     {
         $token = $this->getService()->getAccessToken($this->code);
-
+        $this->accessToken = $token;
         if (DEBUG) {
             $this->logger->debug(__METHOD__.': Got access token: '.(empty($token) ? 'No' : 'Yes'));
             $this->logger->debug(__METHOD__.': Fetch user profile from '.$this->getUserAPiUrl());
@@ -130,7 +144,7 @@ class GenericOAuth2Provider extends Base implements OAuthAuthenticationProviderI
 
         return $this->httpClient->getJson(
             $this->getUserAPiUrl(),
-            array($this->getService()->getAuthorizationHeader())
+            array($this->getAuthorizationHeader())
         );
     }
 
@@ -213,6 +227,10 @@ class GenericOAuth2Provider extends Base implements OAuthAuthenticationProviderI
      */
     public function getUserAPiUrl()
     {
+        $url = $this->configModel->get('oauth2_user_api_url');
+        if ($this->accessToken) {
+            $url  = $url . "&access_token=". $this->accessToken;
+        }
         return $this->configModel->get('oauth2_user_api_url');
     }
 }

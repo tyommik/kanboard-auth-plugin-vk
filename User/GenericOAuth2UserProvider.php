@@ -125,7 +125,7 @@ class GenericOAuth2UserProvider extends Base implements UserProviderInterface
     }
 
     /**
-     * Get user full name
+     * Get full user name
      *
      * @access public
      * @return string
@@ -219,7 +219,12 @@ class GenericOAuth2UserProvider extends Base implements UserProviderInterface
 
     protected function getKey($key)
     {
+        if ($key === 'oauth2_key_name') {
+            $first_name = $this->userData['response'][0]['first_name'];
+            $last_name = $this->userData['response'][0]['last_name'];
+            return $first_name . " " . $last_name;
+        }
         $key = $this->configModel->get($key);
-        return ! empty($key) && isset($this->userData[$key]) ? $this->userData[$key] : '';
+        return $this->userData['response'][0][$key];
     }
 }
