@@ -1,14 +1,12 @@
-OAuth2 Authentication
+VK [Vkontakte] Authentication
 =====================
 
-[![Build Status](https://travis-ci.org/kanboard/plugin-oauth2.svg?branch=master)](https://travis-ci.org/kanboard/plugin-oauth2)
-
-Generic OAuth2 authentication plugin.
+VK OAuth2 authentication plugin based on generic plugin.
 
 Author
 ------
 
-- Frédéric Guillot
+- Artem Shibaev
 - License MIT
 
 Requirements
@@ -32,7 +30,7 @@ Configuration
 
 Go to the application settings > integrations > OAuth2 Authentication.
 
-### 1) Create a new application on the OAuth2 provider
+### 1) Create a new application on the VK provider
 
 Go to the third-party authentication provider and add a new application. 
 Copy and paste the **Kanboard callback URL** and generate a new set of tokens.
@@ -55,22 +53,13 @@ Copy those values in the Kanboard's settings.
 Examples
 --------
 
-Example for Github OAuth2:
+Example for VK:
 
-- **Authorize URL**: `https://github.com/login/oauth/authorize`
-- **Token URL**: `https://github.com/login/oauth/access_token`
-- **User API URL**: `https://api.github.com/user`
-- **Username Key**: `login`
-- **Name Key**: `name`
+- **Authorize URL**: `https://oauth.vk.com/authorize`
+- **Token URL**: `https://oauth.vk.com/access_token`
+- **User API URL**: `https://api.vk.com/method/users.get?fields=screen_name,id,email&v=5.92`
+- **Scopes**: `notify`
+- **Username Key**: `screen_name`
+- **Name Key**: `first_name,second_name` (This doesn't matter now, is used first_name + last_name)`
 - **Email Key**: `email`
 - **User ID Key**: `id`
-
-Example for Salesforce:
-
-- **Authorize URL**: `https://login.salesforce.com/services/oauth2/authorize`
-- **Token URL**: `https://login.salesforce.com/services/oauth2/token`
-- **User API URL**: `https://login.salesforce.com/services/oauth2/userinfo`
-- **Username Key**: `nickname`
-- **Name Key**: `name`
-- **Email Key**: `email`
-- **User ID Key**: `user_id`
