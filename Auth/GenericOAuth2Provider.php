@@ -231,6 +231,6 @@ class GenericOAuth2Provider extends Base implements OAuthAuthenticationProviderI
         if ($this->accessToken) {
             $url  = $url . "&access_token=". $this->accessToken;
         }
-        return $this->configModel->get('oauth2_user_api_url');
+        return $url;
     }
 }
